@@ -1,12 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-class User(models.Model):
-    username = models.CharField(
-        max_length=255,
-        verbose_name="Имя пользователя",
-        blank = True, null = True,
-        unique=True
-    )
+class User(AbstractUser):
     email = models.EmailField(
         unique=True,
         verbose_name="Почта",
@@ -36,4 +31,9 @@ class User(models.Model):
         blank = True, null = True,
         unique=True
     )
-
+    def __str__(self):
+        return self.username 
+    
+    class Meta:
+        verbose_name = "Пользователь"
+        verbose_name_plural = "Пользователи"
