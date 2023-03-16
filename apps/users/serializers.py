@@ -12,6 +12,14 @@ class UserSerializer(serializers.ModelSerializer):
                   'phone_number', 'age','created_at'
                   )
 
+class UserDetailSerializer(serializers.ModelSerializer):
+    from_user = HistoryTransferSerializer(read_only=True, many=True)
+    class Meta:
+        model = User 
+        fields = ('id',  'username', 'email', 
+                  'phone_number', 'age', 'balance', 
+                  'wallet_address','created_at','from_user'
+                  )
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
